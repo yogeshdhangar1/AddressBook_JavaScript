@@ -179,7 +179,7 @@ function addContact(){
 }
 function displaycontact(){
     while(true){
-        let choice = prompt('--Display Menu---\n1. Display all contacts\n2. Display Total number of contacts\n3. Back\n')
+        let choice = prompt('--Display Menu---\n1. Display all contacts\n2. Display Total number of contacts\n3. Display total contact in given City\n4. Display total contact in given State\n5. Back\n')
         if (choice === "1") {
             console.log(contactList);
         }
@@ -187,9 +187,35 @@ function displaycontact(){
             console.log("There are total "+contactList.length+" contacts saved");
         }
         if (choice === "3") {
+            let userGivenCity = prompt("Enter City to get count of persons\n");
+            displayCountOfPersonByCity(userGivenCity);
+        }
+        if (choice === "4") {
+            let userGivenState = prompt("Enter State to search person\n");
+            displayCountOfPersonBySate(userGivenState);
+        }
+        if (choice === "5") {
             break;
         }
     }
+}
+function displayCountOfPersonByCity(userGivenCity){
+    let count = 0;
+    for(let i =0;i<contactList.length;i++){        
+        if(userGivenCity==contactList[i].city){
+            count++;
+        }
+    }
+    console.log('There are '+count+' person in '+userGivenCity)
+}
+function displayCountOfPersonBySate(userGivenState){
+    let count = 0;
+    for(let i =0;i<contactList.length;i++){        
+        if(userGivenState==contactList[i].state){
+            count++;
+        }
+    }
+    console.log('There are '+count+' person in '+userGivenState)
 }
 function editContact(){
     let userGivenFirstName = prompt('Enter first name to edit contact')
@@ -262,6 +288,8 @@ function searchByCityName (){
     }
     if(count==0){
         console.log("No record found");
+    }else{
+        console.log('There are '+count+' person in '+userGivenCity)
     }
 }
 function searchByStateName (){
@@ -275,5 +303,21 @@ function searchByStateName (){
     }
     if(count==0){
         console.log("No record found");
+    }else{
+        console.log('There are '+count+' person in '+userGivenState)
+    }
+}
+function searchContact(){
+    while(true){
+        let choice = prompt('--Search Menu---\n1. Search person by City\n2. Search person by State\n3. Back\n')
+        if (choice === "1") {
+            searchByCityName();
+        }
+        if (choice === "2") {
+            searchByStateName();
+        }
+        if (choice === "3") {
+            break;
+        }
     }
 }
