@@ -175,11 +175,8 @@ function addContact(){
     t=true;
     let obj = new Person(fName,lastName,address,city,state,zip,phoneNumber,email);
     contactList.push(obj);
-    let Ketan = new Person('Ketan','Chindarkar','Hill Road','Mumbai','Maharashtra','400015','9967945885','ketan12@gmail.com');
-    let Yash = new Person('Yash','Ghade','Farm House','Panji','Goa','404715','7897894851','yash@gmail.com');
-    contactList.push(Ketan);
-    contactList.push(Yash);
 }
+
 function displaycontact(){
     while(true){
         let choice = prompt('--Display Menu---\n1. Display all contacts\n2. Display Total number of contacts\n3. Display total contact in given City\n4. Display total contact in given State\n5. Back\n')
@@ -326,11 +323,20 @@ function searchContact(){
 }
 function sortingOfContacts(){
     while(true){
-        let choice = prompt('--Sort Contacts---\n1. By first Name\n2. Back\n')
+        let choice = prompt('--Sort Contacts---\n1. By first Name\n2. By City\n3. By State\n4. By Zip\n5. Back\n')
         if (choice === "1") {
             sortByName();
         }
         if (choice === "2") {
+            sortByCity();
+        }
+        if (choice === "3") {
+            sortByState();
+        }
+        if (choice === "4") {
+            sortByZip();
+        }
+        if (choice === "5") {
             break;
         }
     }
@@ -339,6 +345,66 @@ function sortByName(){
     contactList.sort((a, b) => {
         const nameA = a.firstName.toUpperCase(); // ignore upper and lowercase
         const nameB = b.firstName.toUpperCase(); // ignore upper and lowercase
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+        // names must be equal
+        return 0;
+      });
+      console.log(contactList);
+}
+function sortByCity(){
+    contactList.sort((a, b) => {
+        const nameA = a.city.toUpperCase(); // ignore upper and lowercase
+        const nameB = b.city.toUpperCase(); // ignore upper and lowercase
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+        // names must be equal
+        return 0;
+      });
+      console.log(contactList);
+}
+function sortByCity(){
+    contactList.sort((a, b) => {
+        const nameA = a.city.toUpperCase(); // ignore upper and lowercase
+        const nameB = b.city.toUpperCase(); // ignore upper and lowercase
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+        // names must be equal
+        return 0;
+      });
+      console.log(contactList);
+}
+function sortByState(){
+    contactList.sort((a, b) => {
+        const nameA = a.state.toUpperCase(); // ignore upper and lowercase
+        const nameB = b.state.toUpperCase(); // ignore upper and lowercase
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+        // names must be equal
+        return 0;
+      });
+      console.log(contactList);
+}
+function sortByZip(){
+    contactList.sort((a, b) => {
+        const nameA = a.zip.toUpperCase(); // ignore upper and lowercase
+        const nameB = b.zip.toUpperCase(); // ignore upper and lowercase
         if (nameA < nameB) {
           return -1;
         }
