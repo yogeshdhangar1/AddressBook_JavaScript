@@ -22,7 +22,7 @@ const prompt = require('prompt-sync')();
 let contactList = new Array();
 let t = true;
 while (t) {
-    let choice = prompt("\t--Menu-- \n1. Create Contact \n2. Disply \n3. Edit Contact \n4. Delete Contact\n5. Exit\n");
+    let choice = prompt("\t--Menu-- \n1. Create Contact \n2. Disply \n3. Edit Contact \n4. Delete Contact\n5. Search\n6. Exit\n");
     if (choice === "1") {
         addContact();
     }
@@ -36,6 +36,9 @@ while (t) {
         deleteContact();
     }
     if (choice === "5") {
+        searchContact();
+    }
+    if (choice === "6") {
         t = false;
     }
     if (choice != 1 && choice != 2 && choice != 3&&choice != 4 && choice != 5) {
@@ -43,6 +46,16 @@ while (t) {
     }
 }
 function addContact(){
+    function checkNameExit(userGivenFirstName){
+        for(let i =0;i<contactList.length;i++){        
+            if(userGivenFirstName==contactList[i].firstName){  
+                console.log('Name already exit, create contact with different name')  
+                return true;
+            }else{
+                return false;
+            }
+        }
+    }
     function checkName(name){
         let namePattern = RegExp('[A-Z]{1}[a-z]{2,}')
         if(namePattern.test(name)){
@@ -91,6 +104,7 @@ function addContact(){
         if(t==true){
             console.log("Invalid Input");
         }
+        t=checkNameExit(fName);
     }
     let lastName;
     t=true;
@@ -140,7 +154,7 @@ function addContact(){
     let phoneNumber;
     t=true;
     while(t){
-        phoneNumber = prompt("Enter Phone Number Name " );
+        phoneNumber = prompt("Enter Phone Number " );
         t = checkPhoneNumber(phoneNumber);
         if(t==true){
             console.log("Invalid Input");
@@ -149,7 +163,7 @@ function addContact(){
     let email;
     t=true;
     while(t){
-        email = prompt("Enter Email Name  ");
+        email = prompt("Enter Email ");
         t = checkEmail(email);
         if(t==true){
             console.log("Invalid Input ");
@@ -157,12 +171,12 @@ function addContact(){
     }
     t=true;
     let obj = new Person(fName,lastName,address,city,state,zip,phoneNumber,email);
-    contactList.push(obj)
-let Ashutosh = new Person('ashutosh','Nawale','Nagpur','Nagpur','Maharashtra','400015','9967945885','Ashu12@gmail.com');
-let Yash = new Person('Yash','Ghade','Farm House','Panji','Goa','404715','7897894851','yash@gmail.com');
-contactList.push(Ketan);
-contactList.push(Yash);
-
+    contactList.push(obj);
+    let Ketan = new Person('Ketan','Chindarkar','Hill Road','Mumbai','Maharashtra','400015','9967945885','ketan12@gmail.com');
+    let Yash = new Person('Yash','Ghade','Farm House','Panji','Goa','404715','7897894851','yash@gmail.com');
+    contactList.push(Ketan);
+    contactList.push(Yash);
+}
 
 function displaycontact(){
     while(true){
@@ -236,14 +250,4 @@ function deleteContact(){
             i--;
         }
     }
-}
-function display(){
-    let userGivenFirstName = prompt('Enter first name to edit contact\n5')
-    for(let i =0;i<contactList.length;i++){        
-        if(userGivenFirstName==contactList[i].firstName){
-            contactList.splice(i, 1); 
-            i--;
-        }
-    }
-}
 }
