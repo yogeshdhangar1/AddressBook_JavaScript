@@ -12,130 +12,206 @@ class person{
     getDetails(){
         return (`First Name: ${this.firstName} \nLast Name: ${this.firstName}\nAddress: ${this.address}\nCity : ${this.city}\nState : ${this.state}\nZip : ${this.zip}\nPhone Number : ${this.phoneNumber}\nEmail ID: ${this.email}`)
     }
+    setCity(city){
+        this.city=city;
+    }
     
 }
 const prompt = require('prompt-sync')();
 //contactlist Array to save new contacts
 let contactList = new Array();
-function checkName(name){
-    let namePattern = RegExp('[A-Z]{1}[a-z]{2,}')
-    if(namePattern.test(name)){
-        return false;
-    }else{
-        return true;
+let t = true;
+while (t) {
+    let choice = prompt("\t--Menu-- \n1. Create Contact \n2. Disply Contacts \n3. Edit Contact \n4. Exit\n");
+    if (choice === "1") {
+        addContact();
+    }
+    if (choice === "2") {
+        displaycontact();
+    }
+    if (choice === "3") {
+        editContact();
+    }
+    if (choice === "4") {
+        t = false;
+    }
+    if (choice != 1 && choice != 2 && choice != 3) {
+        console.log("Enter a Valid input")
     }
 }
-function checkAddress(address){
+function addContact(){
+    function checkName(name){
+        let namePattern = RegExp('[A-Z]{1}[a-z]{2,}')
+        if(namePattern.test(name)){
+            return false;
+        }else{
+            return true;
+        }
+    }
+    function checkAddress(address){
     let addPattern = RegExp('[a-zA-Z0-9\s]{3,}')
-    if(addPattern.test(address)){
-        return false;
-    }else{
-        return true;
+        if(addPattern.test(address)){
+            return false;
+        }else{
+            return true;
+        }
     }
-}
-
-function checkPhoneNumber(pNum){
+    function checkPhoneNumber(pNum){
     let pNumPattern = RegExp('[5-9]{1}[0-9]{9}')
-    if(pNumPattern.test(pNum)){
-        return false;
-    }else{
-        return true;
+        if(pNumPattern.test(pNum)){
+            return false;
+        }else{
+            return true;
+        }
     }
-}
-function checkEmail(email){
+    function checkEmail(email){
     let pNumPattern = RegExp('[a-z]{1,}([-+_])?([.][a-zA-Z0-9]{2,})?([A-Za-z0-9]{1,})?@[a-z0-9]{1,}.[a-z]{2,3}(.[a-z]{2,3})?')
-    if(pNumPattern.test(email)){
-        return false;
-    }else{
-        return true;
+        if(pNumPattern.test(email)){
+            return false;
+        }else{
+            return true;
+        }
     }
-}
-function checkZip(zip){
+    function checkZip(zip){
     let zipPattern = RegExp('^[0-9]{6}$')
-    if(zipPattern.test(zip)){
-        return false;
-    }else{
-        return true;
+        if(zipPattern.test(zip)){
+            return false;
+        }else{
+            return true;
+        }
     }
+    t=true
+    let fName;
+    while(t){
+    fName = prompt("Enter First name ");
+        t = checkName(fName);
+        if(t==true){
+            console.log("Invalid Input");
+        }
+    }
+    let lastName;
+    t=true;
+    while(t){
+        lastName = prompt("Enter Last name ");
+        t = checkName(lastName);
+        if(t==true){
+            console.log("Invalid Input");
+        }
+    }
+    let address;
+    t=true;
+    while(t){
+        address = prompt("Enter Address ");
+        t = checkAddress(address);
+        if(t==true){
+            console.log("Invalid Input");
+        }
+    }
+    let city;
+    t=true;
+    while(t){
+        city = prompt("Enter City name ");
+        t = checkName(city);
+        if(t==true){
+            console.log("Invalid Input ");
+        }
+    }
+    let state;
+    t=true;
+    while(t){
+        state = prompt("Enter State Name ");
+        t = checkName(state);
+        if(t==true){
+            console.log("Invalid Input");
+        }
+    }
+    let zip;
+    t=true;
+    while(t){
+        zip = prompt("Enter Zip ");
+        t = checkZip(zip);
+        if(t==true){
+            console.log("Invalid Input ");
+        }
+    }
+    let phoneNumber;
+    t=true;
+    while(t){
+        phoneNumber = prompt("Enter Phone Number Name " );
+        t = checkPhoneNumber(phoneNumber);
+        if(t==true){
+            console.log("Invalid Input");
+        }
+    }
+    let email;
+    t=true;
+    while(t){
+        email = prompt("Enter Email Name  ");
+        t = checkEmail(email);
+        if(t==true){
+            console.log("Invalid Input ");
+        }
+    }
+    t=true;
+    let obj = new Person(fName,lastName,address,city,state,zip,phoneNumber,email);
+    contactList.push(obj);
+    let Ketan = new Person('Ketan','Chindarkar','Hill Road','Mumbai','Maharashtra','400015','9967945885','ketan12@gmail.com');
+    let Yash = new Person('Yash','Ghade','Farm House','Panji','Goa','404715','7897894851','yash@gmail.com');
+    contactList.push(Ketan);
+    contactList.push(Yash);
 }
 
-let t=true
-let fName;
-while(t){
-    fName = prompt("Enter First name");
-    t = checkName(fName);
-    if(t==true){
-        console.log("Invalid Input");
-    }
+function displaycontact(){
+    console.log(contactList);
 }
-let lastName;
-t=true;
-while(t){
-    lastName = prompt("Enter Last name");
-    t = checkName(lastName);
-    if(t==true){
-        console.log("Invalid Input");
-    }
-}
-let address;
-t=true;
-while(t){
-    address = prompt("Enter Address ");
-    t = checkAddress(address);
-    if(t==true){
-        console.log("Invalid Input");
-    }
-}
-let city;
-t=true;
-while(t){
-    city = prompt("Enter City name");
-    t = checkName(city);
-    if(t==true){
-        console.log("Invalid Input");
-    }
-}
-let state;
-t=true;
-while(t){
-    state = prompt("Enter State Name");
-    t = checkName(state);
-    if(t==true){
-        console.log("Invalid Input");
-    }
-}
-// let zip = 400156;
-let zip;
-t=true;
-while(t){
-    zip = prompt("Enter Zip");
-    t = checkZip(zip);
-    if(t==true){
-        console.log("Invalid Input");
-    }
-}
-let phoneNumber;
-t=true;
-while(t){
-    phoneNumber = prompt("Enter PhoneNumber Name");
-    t = checkPhoneNumber(phoneNumber);
-    if(t==true){
-        console.log("Invalid Input");
-    }
-}
-let email;
-t=true;
-while(t){
-    email = prompt("Enter Email Name");
-    t = checkEmail(email);
-    if(t==true){
-        console.log("Invalid Input");
-    }
-}
-let Ashutosh = new Person('Ashutosh','Nawale','Nagpur','Naagpur','Maharashtra','400015','9967945885','Ashu12@gmail.com');
-let Yash = new Person('Yash','Ghade','Farm House','Panji','Goa','404715','7897894851','yash@gmail.com');
-contactList.push(Ashutosh);
-contactList.push(Yash);
-contactList.push(obj);
-console.log(contactList);
 
+function editContact(){
+    let userGivenFirstName = prompt('Enter first name to edit contact')
+    for(let i =0;i<contactList.length;i++){        
+        if(userGivenFirstName==contactList[i].firstName){
+            while(true){
+                let choice = prompt('--Edit Menu---\n1. Edit First Name\n2. Edit Last Name\n3. Edit Address\n4. Edit City\n5. Edit State\n6. Edit Zip\n7. Edit Phone number\n8. Edit email\n9. Back')
+                if (choice === "1") {
+                    let editedFirstName = prompt('Enter new first name');
+                    contactList[i].firstName = editedFirstName;
+                }
+                if (choice === "2") {
+                    let editedLastName = prompt('Enter new last Name');
+                    contactList[i].lastName = editedLastName;
+                }
+                if (choice === "3") {
+                    let editedAddress = prompt('Enter new Address ');
+                    contactList[i].address = editedAddress;
+                }
+                if (choice === "4") {
+                    let editedCity = prompt('Enter new City ');
+                    contactList[i].address = editedCity;
+                }
+                if (choice === "5") {
+                    let editedState = prompt('Enter new State ');
+                    contactList[i].state = editedState;
+                }
+                if (choice === "6") {
+                    let editedZip = prompt('Enter new Zip ');
+                    contactList[i].zip = editedZip;
+                }
+                if (choice === "7") {
+                    let editedPhoneNumber = prompt('Enter new Phone Number ');
+                    contactList[i].phoneNumber = editedPhoneNumber;
+                }
+                if (choice === "8") {
+                    let editedPhoneNumber = prompt('Enter new email ');
+                    contactList[i].email = editedPhoneNumber;
+                }
+                if (choice === "9") {
+                    break;
+                }
+                if (choice != "1" && choice != "2" && choice != "3"&&choice != "4" && choice != "5" && choice != "6"&&choice != "7" && choice != "8" && choice != "9") {
+                    console.log("Enter a Valid input")
+                }
+            
+            }
+            
+        }
+    }
+}
